@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Twilio Chat</title>
+  <meta name="google-signin-scope" content="profile">
+  <meta name="google-signin-client_id" content="1003561219122-8e45ibd1i42tu1gnqvs15e49f8g7fq0v.apps.googleusercontent.com">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+  <div id="login" class="popup">
+    <h3>Log In</h3>
+    <div class="form-group">
+      <input class="form-control mb-4" id="login-name" placeholder="Username"></input>
+      <button type="button" id="login-button" class="btn btn-primary">Log In</button>
+    </div>
+    <!-- <p>-or-</p> -->
+    <!-- <div class="g-signin2" data-onsuccess="googleLogIn" data-theme="light"></div> -->
+  </div>
+  <div id="add-member" class="popup">
+    <h3>Add User<div class="remove-button glyphicon glyphicon-remove"></div></h3>
+    <input class="form-control" id="add-identity" placeholder="Identity"></input>
+    <button type="button" id="add-button" class="btn btn-primary">Add</button>
+  </div>
+  <div id="invite-member" class="popup">
+    <h3>Invite User<div class="remove-button glyphicon glyphicon-remove"></div></h3>
+    <input class="form-control" id="invite-identity" placeholder="Identity"></input>
+    <button type="button" id="invite-button" class="btn btn-primary">Invite</button>
+  </div>
+  <div id="update-channel" class="popup">
+    <h3>Edit Channel<div class="remove-button glyphicon glyphicon-remove"></div></h3>
+    <input class="form-control" id="update-channel-display-name" placeholder="Display Name"/>
+    <input class="form-control" id="update-channel-unique-name" placeholder="Unique Name (Optional)"/>
+    <input class="form-control" id="update-channel-desc" placeholder="Description (Optional)"/>
+    <input class="form-control" disabled="true" type="checkbox" class="form-check-input"  id="update-channel-private"/><label>Private Channel</label>
+    <button type="button" id="update-channel-submit" class="btn btn-primary">Save</button>
+  </div>
+  <div id="create-channel" class="popup">
+    <h3>New Channel<div class="remove-button glyphicon glyphicon-remove"></div></h3>
+    <input class="form-control" id="create-channel-display-name" placeholder="Display Name"/>
+    <input class="form-control" id="create-channel-unique-name" placeholder="Unique Name (Optional)"/>
+    <input class="form-control" id="create-channel-desc" placeholder="Description (Optional)"/>
+    <input class="form-control" type="checkbox" class="form-check-input"  id="create-channel-private"/><label>Private Channel</label>
+    <button type="button" id="create-new-channel" class="btn btn-primary">New Channel</button>
+  </div>
+  <div id="overlay" class="h-100 w-100"></div>
+
+  <div class="h-100">
+
+    <div id="sidebar" class="h-100">
+      <div id="profile" class="p-3">
+        <div id="presence" class="mr-1"></div>
+        <span id="user_name"></span>
+      </div>
+      <div id="channels">
+        <div id="invited-channels">
+          <ul></ul>
+        </div>
+        <div id="my-channels">
+          <ul></ul>
+        </div>
+        <div id="known-channels">
+          <ul></ul>
+        </div>
+        <div id="public-channels">
+          <ul></ul>
+        </div>
+        <div id="sidebar-footer">
+          <button type="button" id="create-channel-button" class="btn btn-primary">New Channel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-container h-100" >
+
+<!--       <div id="no-channel" class="d-flex align-items-center justify-content-center">
+        <div><p>Select a channel</p></div>
+      </div> -->
+
+      <div class="container-fluid d-flex h-100 p-0 chat-container">
+        <div class="chat-view d-flex flex-column justify-content-between">
+          <div id="channel" class="chat-view d-flex flex-column justify-content-between">
+              
+              <div id="channel-info" class="chat-view-header p-3 d-flex justify-content-between">
+                <div>
+                  <h1 id="channel-title"></h1>
+                  <h2 id="channel-desc"></h2>
+                </div>
+                <div>
+                  <button type="button" id="delete-channel" class="btn btn-primary">Delete</button>
+                  <button type="button" id="edit-channel" class="btn btn-primary mr-3">Edit</button>
+                </div>
+              </div>
+
+              <div id="channel-messages" class="chat-view-body p-3">
+                <ul></ul>
+              </div>
+<!-- 
+              <div id="channel-body" class="chat-view-body p-3">
+                <div id="channel-chat">
+                  <div id="channel-messages"><ul></ul></div>
+                  <div id="channel-join-panel">
+                    <button type="button" id="join-channel" class="btn btn-primary">Join</button>
+                  </div>
+                  <div id="channel-members">
+                    <h5>Members</h5>
+                    <button type="button" id="add-user" class="btn btn-primary">Add</button>
+                    <button type="button" id="invite-user" class="btn btn-primary">Invite</button>
+                    <ul class="mt-2 px-2"></ul>
+                  </div>
+                </div>
+              </div> -->
+
+              <div id="" class="chat-view-footer p-3">
+                <div id="channel-message-send" class="d-flex">
+                      <div id="typing-indicator"><span></span></div>
+                      <input class="form-control" type="textbox" id="message-body-input"></input>
+                      <button type="button" id="send-message" class="btn btn-primary float-right">Send</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <script src="/js/vendor/fingerprint2.js"></script>
+  <script src="/js/vendor/superagent.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+  <script src="https://media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js"></script>
+  <script src="https://media.twiliocdn.com/sdk/js/chat/v1.0/twilio-chat.min.js"></script>
+
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script type="text/javascript" src="/js/md5.js"></script>
+  <script type="text/javascript" src="/js/index.js"></script>
+</body>
+</html>
+
